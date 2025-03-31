@@ -4,7 +4,7 @@ const loginEndpoint = require("./endpoints/login.js")
 
 module.exports = function(app){
   app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home',{data:{session:req.session}});
   })
   
   loginEndpoint(app);
