@@ -1,6 +1,6 @@
 <div class="hamContainer">
   <div class="hamburger">
-    &#9776;
+    <span class=hamIcon>&#9776;</span>
     <div style="position:relative;flex-basis:100%">
       <nav class="menu">
         <a href="{{url}}/auth/login">Login</a>
@@ -17,10 +17,13 @@
     right: 0;
     margin: 0.5rem;
   }
-
+  .hamIcon{
+    user-select:none;
+    
+    font-weight: bold;
+  }
   .hamburger {
     font-size: 2rem;
-    font-weight: bold;
     display: flex;
     flex-flow:row wrap;
     justify-content: center;
@@ -30,10 +33,11 @@
     border-radius: 0.5rem;
     background-color: white;
     text-align: center;
-    userselect:
+    
   }
 
   .menu {
+    text-align:left;
     position: absolute;
     top: 0rem;
     right: 0;
