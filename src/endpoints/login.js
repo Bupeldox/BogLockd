@@ -3,6 +3,7 @@
 function get(req,res){
   return res.render("login")
 }
+
 function post(req,res){
   
 }
