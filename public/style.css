@@ -10,6 +10,7 @@ body{
 .contentPadding{
 	padding:1rem 2rem;
 }
+
 .flex-row-center{
 	display:flex;
 	flex-flow:row wrap;

@@ -1,54 +1,78 @@
-
-div  
-<div class="hamburger">&#9776;</div>
-<nav class="menu">
-  <a href="{{url}}/auth/login">Login</a>
-  <a href="{{url}}/auth/register">Register</a>
-  <a href="{{url}}/pricing">Pricing</a>
-</nav>
-
+<div class="hamContainer">
+  <div class="hamburger">
+    &#9776;
+    <div style="position:relative;flex-basis:100%">
+      <nav class="menu">
+        <a href="{{url}}/auth/login">Login</a>
+        <a href="{{url}}/auth/register">Register</a>
+        <a href="{{url}}/pricing">Pricing</a>
+      </nav>
+    </div>
+  </div>
+</div>
 <style>
-  .hamburger{
-    font-size:1rem;
-    font-weight:bold;
-    display:inline-flex;
-    justify-content:center;
-    align-items:center;
-    height:2rem;
-    width:2rem;
-    float:right ;
-    
-    border-radius:0.5rem;
-    background-color:white;
-    text-align:center;
+  .hamContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 0.5rem;
   }
-        .menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: white;
-            color: black;
-        }
-        .menu .logo {
-            font-size: 24px;
-        }
-        .menu .hamburger {
-            cursor: pointer;
-            font-size: 24px;
-        }
-        nav.menu {
-            display: none;
-            list-style: none;
-            padding: 0;
-        }
-        nav.menu.show {
-            display: block!important;
-        }
 
+  .hamburger {
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    flex-flow:row wrap;
+    justify-content: center;
+    align-items: flex-start;
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 0.5rem;
+    background-color: white;
+    text-align: center;
+    userselect:
+  }
+
+  .menu {
+    position: absolute;
+    top: 0rem;
+    right: 0;
+    font-size:1rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    z-index: 2;
+    border-radius:0.5rem 0 0.5rem 0.5rem;
+    padding:0.5rem;
+  }
+
+  .menu .logo {
+    font-size: 24px;
+  }
+
+  .menu .hamburger {
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  nav.menu {
+    display: none;    
+  }
+
+  nav.menu.show {
+    display: block !important;
+  }
+
+  .show .hamburger{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 </style>
 <script>
-  document.querySelector('.hamburger').addEventListener('click', function() {
-            document.querySelector('nav.menu').classList.toggle('show');
-        });
+  document.querySelector('.hamburger').addEventListener('click', function () {
+    document.querySelector('nav.menu').classList.toggle('show');
+    document.querySelector('.hamContainer').classList.toggle('show');
+  });
 </script>
