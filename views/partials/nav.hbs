@@ -1,5 +1,54 @@
-<nav>
+
+div  
+<div class="hamburger">&#9776;</div>
+<nav class="menu">
   <a href="{{url}}/auth/login">Login</a>
   <a href="{{url}}/auth/register">Register</a>
   <a href="{{url}}/pricing">Pricing</a>
 </nav>
+
+<style>
+  .hamburger{
+    font-size:1rem;
+    font-weight:bold;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    height:2rem;
+    width:2rem;
+    float:right ;
+    
+    border-radius:0.5rem;
+    background-color:white;
+    text-align:center;
+  }
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: white;
+            color: black;
+        }
+        .menu .logo {
+            font-size: 24px;
+        }
+        .menu .hamburger {
+            cursor: pointer;
+            font-size: 24px;
+        }
+        nav.menu {
+            display: none;
+            list-style: none;
+            padding: 0;
+        }
+        nav.menu.show {
+            display: block!important;
+        }
+
+</style>
+<script>
+  document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('nav.menu').classList.toggle('show');
+        });
+</script>
