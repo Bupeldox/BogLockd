@@ -7,9 +7,17 @@
   <link href="{{url}}/style.css" rel="stylesheet"/>
 </head>
 <body>
+  {{#if showTitleAtTop}}
   <h1 style="text-align:center;">
    BogLockd
   </h1>
+  {{else}}
+  
+  <div style=padding:1rem;>
+    BogLockd
+  </div>
+  
+  {{/if}}
 
   {{>nav}}
   <main style="overflow:hidden;">

@@ -14,7 +14,7 @@ const { engine } = require("express-handlebars");
 app.use(express.static(path.join(__dirname, "public")))
 
 helpers:{
-  url:()=>{return "https://awesome-grand-rubidium.glitch.me/"}
+  url:()=>{return "https://boglockd.glitch.me/"}
   
 }
 
