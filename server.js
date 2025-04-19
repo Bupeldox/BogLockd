@@ -1,6 +1,6 @@
 
 
-require("testEnv.js");
+require("./test.secret.js");
 const express = require('express')
 const app = express()
 const port = 3000
