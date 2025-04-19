@@ -1,10 +1,10 @@
 
 
-function login(req,res){
-    return res.render("login")
+function login(req,res,viewLoc){
+    return res.render(viewLoc)
 }
-function register(req,res){
-  return res.render("login")
+function register(req,res,viewLoc){
+  return res.render(viewLoc)
 }
 
   

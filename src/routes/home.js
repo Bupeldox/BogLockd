@@ -4,14 +4,14 @@ const DataStore = require("../Database/Store");
 const dataStore = new DataStore("doors");
 
 
-function index(req,res){
+function index(req,res,viewLoc){
   console.log("home");
-  res.render('home',{data:{session:req.session}});
+  res.render(viewLoc,{data:{session:req.session}});
 }
 
-function pricing(req,res){
+function pricing(req,res,viewLoc){
   console.log("pricing");
-    return res.render("pricing");
+  res.render(viewLoc)
 }
 
   

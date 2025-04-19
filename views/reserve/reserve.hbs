@@ -1,0 +1,133 @@
+<div style="text-align:center;">
+    <h1>
+        Reserve
+    </h1>
+</div>
+<div style="background-color:white; overflow:auto;">
+    <div class="container">
+        <div class="contentPadding">
+            <style>
+                .reserveButton {
+                    height: 10rem;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    transition: 0.5s flex-grow;
+                    flex-shrink: 3;
+                }
+
+                .reserveButton:has(input:checked) {
+                    flex-grow: 5;
+                }
+
+                .row:has(#SpecificTime:checked, #NOWWW:checked) .reserveButton:not(:has(input:checked)) {
+                    flex-grow: 5;
+                    opacity: 0.5;
+                }
+
+                label:has([type=radio]) {
+                    cursor: pointer;
+                }
+
+                @layer {
+
+                    .button-noStyle {
+                        display: block;
+                        ;
+                        background: none;
+                        color: inherit;
+                        border: none;
+                        padding: 0;
+                        font: inherit;
+                        cursor: pointer;
+                        outline: inherit;
+                        width: 100%;
+                    }
+                }
+
+                .button:hover {
+                    background-color: rgb(247, 229, 255);
+                }
+            </style>
+            <form action="/reserve" method="post" id="form">
+                <p>
+                    When do you need it?
+                </p>
+                <div class="row fancy" style="gap:1rem;">
+                    <label for="SpecificTime"
+                        class="button col col-small roundCorners bgCol1 flex-row-center reserveButton timingButtonLabel">
+                        <div>Specific time?</div>
+                        <div>
+                            <input type="radio" name="asap" id="SpecificTime" value="specified" class="sr-only"
+                                autocomplete="off">
+                            <input type="time" name="when" id="when">
+                        </div>
+                    </label>
+
+                    <label for="NOWWW"
+                        class="button col col-small roundCorners bgCol1 flex-row-center reserveButton timingButtonLabel">
+                        ASAP!
+                        <input type="radio" name="asap" id="NOWWW" value="asap" class="sr-only">
+                    </label>
+                </div>
+                <p id="validation-chooseType" class="text-error" style="display:none;">
+                    Please choose either asap or specific time.
+                </p>
+                <p id="validation-noTime" class="text-error" style="display:none;">
+                    Please give a time for your reservation, or click asap.
+                </p>
+                <p>
+                    We'll do our best to get a reservation when u need it.
+                </p>
+                <button id="submit" type="submit" class="button-noStyle reserveButton bgCol1 roundCorners button"
+                    autocomplete="off">
+                    Reserve!
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('[for="SpecificTime"]').addEventListener("click", () => {
+        document.getElementById("when").focus();
+    });
+    document.getElementById("form").addEventListener("submit", (e) => {
+
+        if (!document.querySelector("[name=asap]:checked")?.value) {
+            document.getElementById("validation-chooseType").style.display = "";
+            var fields = [...document.getElementsByClassName("timingButtonLabel")]
+            var evs = [];
+            fields.map(i => {
+                i.classList.add("border-error")
+                function cancelErrorVis(){
+                    fields.map(f => {
+                        f.classList.remove("border-error");
+                        f.removeEventListener("click",cancelErrorVis)
+                    })
+                    document.getElementById("validation-chooseType").style.display = "none";
+                }
+                i.addEventListener("click",cancelErrorVis, { once: true })
+            });
+
+            e.stopImmediatePropagation();
+            e.preventDefault();
+        }
+
+        if(document.querySelector("[name=asap]:checked")=="specified"&&!document.getElementById("when").value ){
+            var tf =document.getElementById("when");
+            tf.classList.add("border-error");
+            var message = document.getElementById("validation-noTime");
+            message.style.display="";
+            tf.addEventListener("input",()=>{
+                
+                message.style.display="none";
+                tf.classList.remove("border-error");
+
+            },{once:true});
+            e.stopImmediatePropagation();
+            e.preventDefault();
+        }
+
+    })
+</script>

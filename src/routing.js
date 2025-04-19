@@ -2,7 +2,7 @@ const path = require("node:path");
 
 
 
-function setupRouting(base,funcs,app){
+function setupRouting(base,controller,funcs,app){
   var preUrl = base?"base":"";
   for(let method in funcs){
     for(let endpoint in funcs[method]){
@@ -11,9 +11,10 @@ function setupRouting(base,funcs,app){
         endpointToUseInUrl="";
       }
       
-      let url = "/"+[base,endpointToUseInUrl].filter(i=>i).join("/")
+      let url = "/"+[base,endpointToUseInUrl].filter(i=>i).join("/");
+      let viewLoc = controller+"/"+endpoint;
       console.log(url,"->",method,endpoint);
-        app[method](url,(req,res)=>{funcs[method][endpoint](req,res)});
+        app[method](url,(req,res)=>{funcs[method][endpoint](req,res,viewLoc)});
       }
     }
 }
@@ -21,13 +22,14 @@ function setupRouting(base,funcs,app){
 
 module.exports = function(app){
   require("fs").readdirSync(path.resolve(__dirname,"routes")).forEach(function(file) {
-    var base = file.split(".")[0];
+    var controller = file.split(".")[0];
+    base=controller;
     console.log("-  - - ")
-    console.log(file+" - "+base);
+    console.log(file+" - "+controller);
     var funcs = require("./routes/" + file);
-    if(base == "home"){
+    if(controller == "home"){
       base = "";
     }
-    setupRouting(base,funcs,app);
+    setupRouting(base,controller,funcs,app);
   });
 }

@@ -1,6 +1,1 @@
-{
-    "fields":["id","userId","date"],
-    "data":[
-        
-    ]
-}
+{"fields":["id","userId","start","duration"],"data":[{"userId":"aH39T4sQSUTdRTxgmZFpb4WGy36Rtqom","start":"2025-04-19T16:48:50.619Z","duration":7}]}

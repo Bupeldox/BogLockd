@@ -31,6 +31,9 @@ class DataStore{
     }
     add(record){
         this.validateFields(record);
+        var all = this.getAll();
+        all.push(record);
+        this._writeFile(all);
     }
     update(id,record){
         record.id = id;

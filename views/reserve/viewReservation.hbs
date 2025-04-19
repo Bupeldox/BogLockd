@@ -1,0 +1,80 @@
+<div style="text-align:center;">
+    <h1>
+        Your Reservation
+    </h1>
+</div>
+
+
+<style>
+    .reserveButton {
+        height: 10rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        transition: 0.5s flex-grow;
+        flex-shrink: 3;
+    }
+
+    .reserveButton:has(input:checked) {
+        flex-grow: 5;
+    }
+
+    .row:has(#SpecificTime:checked, #NOWWW:checked) .reserveButton:not(:has(input:checked)) {
+        flex-grow: 5;
+        opacity: 0.5;
+    }
+
+    label:has([type=radio]) {
+        cursor: pointer;
+    }
+
+    @layer {
+
+        .button-noStyle {
+            display: block;
+            ;
+            background: none;
+            color: inherit;
+            border: none;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            outline: inherit;
+            width: 100%;
+        }
+    }
+
+    .button:hover {
+        background-color: rgb(247, 229, 255);
+    }
+</style>
+
+<div style="background-color:white; overflow:auto;">
+    <div class="container">
+        <div class="contentPadding">
+            <p>
+                Your stay has been reserved.
+            </p>
+            <div class="row" style="gap:1rem">
+                <div class="col reserveButton roundCorners bgCol1 flex-row-center">
+                    <div>
+                        Time:
+                    </div>
+                    <div>
+                        {{reservation.start}}
+                    </div>
+                </div>
+                <div class="col reserveButton roundCorners bgCol1 flex-row-center">
+                    <div>
+                        Duration:
+                    </div>
+                    <div>
+                        {{reservation.duration}} mins.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
