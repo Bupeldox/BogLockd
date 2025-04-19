@@ -94,6 +94,9 @@
     document.querySelector('[for="SpecificTime"]').addEventListener("click", () => {
         document.getElementById("when").focus();
     });
+    document.getElementById("when").addEventListener("focus",()=>{
+         document.getElementById("SpecificTime").checked = true;
+    });
     document.getElementById("form").addEventListener("submit", (e) => {
 
         if (!document.querySelector("[name=asap]:checked")?.value) {
