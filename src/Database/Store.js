@@ -21,9 +21,9 @@ class DataStore{
         var data = JSON.parse(str);
         return data;
     }
-    _writeFile(data){
+    _writeFile(allRecords){
         var stored = this._readFile();
-        stored.data = data;
+        stored.data = allRecords;
         writeFileSync(this.fileDir,JSON.stringify(stored));
     }
     getAll(){

@@ -12,6 +12,9 @@
 .bgCol1 {
 	background-color: var(--col1);
 }
+.contentItemMargin{
+	margin-block:1rem;
+}
 
 body {
 	background-color: var(--col1);
@@ -84,4 +87,26 @@ body {
 	clip-path: inset(50%);
 	border:
 		0;
+}
+
+@layer{
+	a.a-noStyle{
+		color: inherit; /* blue colors for links too */
+		text-decoration: inherit; /* no underline */
+	}
+	.button-noStyle {
+		display: block;
+		;
+		background: none;
+		color: inherit;
+		border: none;
+		padding: 0;
+		font: inherit;
+		cursor: pointer;
+		outline: inherit;
+		width: 100%;
+	}
+}
+.button:hover {
+	background-color: rgb(247, 229, 255);
 }

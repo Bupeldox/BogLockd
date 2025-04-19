@@ -3,51 +3,53 @@
         Reserve
     </h1>
 </div>
+<style>
+    .reserveButton {
+        height: 10rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        transition: 0.5s flex-grow;
+        flex-shrink: 3;
+    }
+
+    .reserveButton:has(input:checked) {
+        flex-grow: 5;
+        outline:2px solid hsl(240 102% 74% / 1);
+    }
+
+    .row:has(#SpecificTime:checked, #NOWWW:checked) .reserveButton:not(:has(input:checked)) {
+        flex-grow: 5;
+        opacity: 0.5;
+    }
+
+    label:has([type=radio]) {
+        cursor: pointer;
+    }
+
+    @layer {
+
+        .button-noStyle {
+            display: block;
+            ;
+            background: none;
+            color: inherit;
+            border: none;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            outline: inherit;
+            width: 100%;
+        }
+    }
+</style>
 <div style="background-color:white; overflow:auto;">
     <div class="container">
         <div class="contentPadding">
-            <style>
-                .reserveButton {
-                    height: 10rem;
-                    flex-direction: column;
-                    gap: 0.5rem;
-                    transition: 0.5s flex-grow;
-                    flex-shrink: 3;
-                }
-
-                .reserveButton:has(input:checked) {
-                    flex-grow: 5;
-                }
-
-                .row:has(#SpecificTime:checked, #NOWWW:checked) .reserveButton:not(:has(input:checked)) {
-                    flex-grow: 5;
-                    opacity: 0.5;
-                }
-
-                label:has([type=radio]) {
-                    cursor: pointer;
-                }
-
-                @layer {
-
-                    .button-noStyle {
-                        display: block;
-                        ;
-                        background: none;
-                        color: inherit;
-                        border: none;
-                        padding: 0;
-                        font: inherit;
-                        cursor: pointer;
-                        outline: inherit;
-                        width: 100%;
-                    }
-                }
-
-                .button:hover {
-                    background-color: rgb(247, 229, 255);
-                }
-            </style>
+            {{#if error}}
+            <p class="text-error">
+                {{error}}
+            </p>
+            {{/if}}
             <form action="/reserve" method="post" id="form">
                 <p>
                     When do you need it?
@@ -100,31 +102,31 @@
             var evs = [];
             fields.map(i => {
                 i.classList.add("border-error")
-                function cancelErrorVis(){
+                function cancelErrorVis() {
                     fields.map(f => {
                         f.classList.remove("border-error");
-                        f.removeEventListener("click",cancelErrorVis)
+                        f.removeEventListener("click", cancelErrorVis)
                     })
                     document.getElementById("validation-chooseType").style.display = "none";
                 }
-                i.addEventListener("click",cancelErrorVis, { once: true })
+                i.addEventListener("click", cancelErrorVis, { once: true })
             });
 
             e.stopImmediatePropagation();
             e.preventDefault();
         }
 
-        if(document.querySelector("[name=asap]:checked")=="specified"&&!document.getElementById("when").value ){
-            var tf =document.getElementById("when");
+        if (document.querySelector("[name=asap]:checked") == "specified" && !document.getElementById("when").value) {
+            var tf = document.getElementById("when");
             tf.classList.add("border-error");
             var message = document.getElementById("validation-noTime");
-            message.style.display="";
-            tf.addEventListener("input",()=>{
-                
-                message.style.display="none";
+            message.style.display = "";
+            tf.addEventListener("input", () => {
+
+                message.style.display = "none";
                 tf.classList.remove("border-error");
 
-            },{once:true});
+            }, { once: true });
             e.stopImmediatePropagation();
             e.preventDefault();
         }

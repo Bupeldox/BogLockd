@@ -7,8 +7,9 @@ const User = require("../Core/User.js");
 function index(req,res,viewLoc){
   var user = new User(req);
   var reservation = reservationSystem.nextReservation(user.id,new Date());
-  var error = req.params.error;
+  var error = req.query.error;
   if(reservation){
+    reservation.startTime=new Date(reservation.start).toLocaleTimeString();
     res.render("reserve/viewReservation",{
       reservation,
       error
@@ -28,6 +29,7 @@ function parseTime( t ) {
   d.setMinutes( parseInt( time[2]) || 0 );
   return d;
 }
+
 function reserve(req,res,viewLoc){
   var form = {
     when:req.body.when?parseTime(req.body.when):false,
@@ -70,10 +72,24 @@ function reserve(req,res,viewLoc){
   res.redirect("/reserve");
 }
   
+function cancel(req,res,viewLoc){
+  var user = new User(req);
+  var err = reservationSystem.cancelNext(user.id,new Date());
+
+  if(err){
+    res.redirect("/reserve?error="+err);
+    return
+  }
+  res.redirect("/reserve?error=Reservation Canceled");
+
+}
+
+
   
 module.exports = {
     get:{
-        index
+        index,
+        cancel
     },
     post:{
       index:reserve

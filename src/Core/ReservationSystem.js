@@ -91,6 +91,17 @@ class ReservationSystem{
         var upComing = data.filter(i=>i.userId == userId && new Date(i.start) > searchTime);
         return upComing[0];
     }
+    cancelNext(userId,timeToday){
+      var reserv = this.nextReservation(userId,timeToday);
+      if(!reserv){
+        return "no reservations to cancel";
+      }
+      var all = ds.getAll();
+      var toRemoveInd = all.findIndex(i=>i.userId == reserv.userId && i.start == reserv.start);
+      all.splice(toRemoveInd,1);
+      ds._writeFile(all);
+      return false;//no errors
+    }
 
 }
 
