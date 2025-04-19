@@ -1,6 +1,5 @@
 
-
-require("./test.secret.js");
+try{ require("./test.secret.js"); }catch(e){}
 const express = require('express')
 const app = express()
 const port = 3000
