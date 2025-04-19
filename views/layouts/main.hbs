@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <title>BogLockd</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="{{url}}/style.css" rel="stylesheet"/>
+  <meta charset="utf-8">
+  <title>BogLockd</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="{{url}}/style.css" rel="stylesheet" />
 </head>
+
 <body>
   {{#if showTitleAtTop}}
-  <h1 style="text-align:center;">
-   BogLockd
-  </h1>
+
+  <a href="{{url}}/">
+    <h1 style="text-align:center;">
+      BogLockd
+    </h1>
+  </a>
   {{else}}
-  
-  <div style=padding:1rem;>
-    BogLockd
-  </div>
-  
+
+  <a href="{{url}}/">
+    <div style="padding:1rem;">
+      BogLockd
+    </div>
+  </a>
   {{/if}}
 
   {{>nav}}
   <main style="overflow:hidden;">
-  {{{body}}}
+    {{{body}}}
   </main>
 </body>
+
 </html>

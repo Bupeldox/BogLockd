@@ -4,14 +4,16 @@
 	<div class="toiletContainer">
 		<div class="toilet layers" id="toilet">
 		
-		
+      <link rel="stylesheet" href="bog.css">
 			<div class="seat layers lid">
 				<div class="flex-row-center text-center label">
 					<div>
 						<p> 
-							The bog is reserved forever
+              Need the bog?
+							<button onclick="window.location.href='{{url}}/reserve'">Make a reservation (for now or later)</button>
+
 						</p>
-						<button onclick="document.getElementById('toilet').classList.add('lookin')">Is it locked though?</button>
+						<button onclick="document.getElementById('toilet').classList.add('lookin')">Is it locked right though?</button>
 					</div>
 				</div>
 
