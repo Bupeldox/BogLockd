@@ -1,1 +1,1 @@
-{"fields":["id","userId","start","duration"],"data":[]}
+{"fields":["id","userId","doorId","start","duration"],"data":[]}

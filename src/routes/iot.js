@@ -3,14 +3,20 @@ const DataStore = require("../Database/Store");
 
 const dataStore = new DataStore("doors");
 
-
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {string} viewLoc 
+ */
 function locked(req,res,viewLoc){
-  console.log("locked");
   res.render(viewLoc)
+  var doorId = req.params.id
+  dataStore.
 }
 
 function unlocked(req,res,viewLoc){
-  console.log("unlocked");
+  
   res.render(viewLoc)
 }
   
@@ -18,8 +24,6 @@ function unlocked(req,res,viewLoc){
   module.exports = {
     get:{
       locked,
-    },
-    post:{
       unlocked,
     }
   }
