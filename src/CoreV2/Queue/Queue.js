@@ -1,18 +1,26 @@
+import Reservation from "../Reservation/Reservation.js";
 
 
 export default class Queue{
-    constructor(door){
+    constructor(){
         this.queue = [];
     }
     
-    push(user){
-        this.queue.push(user);
+    push(reservation){
+        this.queue.push(reservation);
     }
 
     pop(){
         return this.queue.shift();
     }
-    getPositionOfUserInQueue(user){
-        return this.queue.indexOf(user);
+    getPositionOfUserInQueue(reservation){
+        return this.queue.findIndex(i=>i.user == reservation.user);
+    }
+    /**
+     * 
+     * @returns {Reservation}
+     */
+    first(){
+        return this.queue[0];
     }
 }
