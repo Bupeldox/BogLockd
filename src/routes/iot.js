@@ -3,23 +3,41 @@ const DataStore = require("../Database/Store");
 
 const dataStore = new DataStore("doors");
 
+var lastDate = false;
+var isLocked = true;
 
-function locked(req,res,viewLoc){
+function locked(req, res, viewLoc) {
   console.log("locked");
-  res.render(viewLoc)
+  res.write("recorded lock " + new Date().toString());
+  res.end();
+  isLocked = true;
+  lastDate = new Date()
 }
 
-function unlocked(req,res,viewLoc){
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {*} viewLoc 
+ */
+function unlocked(req, res, viewLoc) {
   console.log("unlocked");
-  res.render(viewLoc)
+  res.write("recorded unlock " + new Date().toString());
+  res.end();
+  isLocked = false;
+  lastDate = new Date();
 }
-  
-  
-  module.exports = {
-    get:{
-      locked,
-    },
-    post:{
-      unlocked,
-    }
-  }
+
+function state(req, res, viewLoc) {
+  res.write("state: locked:"+(isLocked?"true":"false")+ " date:"+lastDate);
+  res.end();
+}
+
+
+module.exports = {
+  get: {
+    locked,
+    unlocked,
+    state
+  },
+}
