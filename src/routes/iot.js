@@ -6,6 +6,7 @@ const dataStore = new DataStore("doors");
 var lastDate = false;
 var isLocked = true;
 
+
 function save(locked,date){
   var obj = {locked,date};
   fs.writeFileSync("./Data/test.json",JSON.stringify(obj));

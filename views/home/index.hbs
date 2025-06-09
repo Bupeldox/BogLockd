@@ -1,43 +1,44 @@
-
-
 <div class="container" style="padding:2rem;">
-	<div class="toiletContainer">
-		<div class="toilet layers" id="toilet">
-		
+  <div class="toiletContainer">
+    <div class="toilet layers" id="toilet">
+
       <link rel="stylesheet" href="bog.css">
-			<div class="seat layers lid">
-				<div class="flex-row-center text-center label">
-					<div>
-						<p> 
+      <div class="seat layers lid">
+        <div class="flex-row-center text-center label">
+          <div>
+            <p>
               Need the bog?
-							<button onclick="window.location.href='{{url}}/reserve'">Guarantee your right to pee - Reserve now</button>
+              <button onclick="window.location.href='{{url}}/reserve'">Guarantee your right to pee - Reserve
+                now</button>
 
-						</p>
-						<button onclick="document.getElementById('toilet').classList.add('lookin')">Is it locked right now though?</button>
-					</div>
-				</div>
+            </p>
+            <button id="showLockedButton">Is it locked right now
+              though?</button>
+          </div>
+        </div>
 
-			</div>
-			<div class="lid flex-row-center">
-				<div class="hole flex-row-center text-center">
+      </div>
+      <div class="lid flex-row-center">
+        <div class="hole flex-row-center text-center">
 
-					<div class="floater">
-						<p>
-							Idk, <br>feature comming soon
-						</p>
-						<button  onclick="document.getElementById('toilet').classList.remove('lookin')">Back</button>
-					</div>
+          <div class="floater">
+            <p id="lockedOutput">
+              Loading
+            </p>
+            <em>Currently only in testing, don't trust</em>
+            <button onclick="document.getElementById('toilet').classList.remove('lookin')">Back</button>
+          </div>
 
-				</div>
-			</div>	
-		</div>
-		<div class="restOfBog">
+        </div>
+      </div>
+    </div>
+    <div class="restOfBog">
 
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 
-<div style="background-color:white; overflow:auto;" >
+<div style="background-color:white; overflow:auto;">
   <div class="container">
     <div class="contentPadding">
       <h2>
@@ -61,45 +62,72 @@
         Out data is wiped every time you wipe (then unlock the door).
       </p>
     </div>
-     <div class="contentPadding">
+    <div class="contentPadding">
       <h2>
         Premium Membershit
       </h2>
       <p class=fancy>
-        The premium account unlocks the ability to <u>check if the bathroom door is locked</u> at any time. 24/7 access and 99.99% uptime.
+        The premium account unlocks the ability to <u>check if the bathroom door is locked</u> at any time. 24/7 access
+        and 99.99% uptime.
       </p>
-       <p>
-         <a href="#">Upgrade to premium now</a>
-       </p>
-  </div>
+      <p>
+        <a href="#">Upgrade to premium now</a>
+      </p>
+    </div>
     <div class="contentPadding">
       <h2>
         S-Tier Premium
       </h2>
       <p class=fancy>
-        As well as everything Premium includes, you will become the <b>King of the Bog</b>, The <b>Bog-master</b>. <u>Perminent Reservation</u>
+        As well as everything Premium includes, you will become the <b>King of the Bog</b>, The <b>Bog-master</b>.
+        <u>Perminent Reservation</u>
       </p>
       <p>
         <a href="#">Contact us for a quote</a>
       </p>
-  </div>
+    </div>
     <div class="contentPadding">
       <h2>
         How does it work?
       </h2>
       <p class=fancy>
-        Registered flushers can reserve a slot on the toilet. Our technology ensures reservations dont overlap, you can do you biz in peace.
+        Registered flushers can reserve a slot on the toilet. Our technology ensures reservations dont overlap, you can
+        do you biz in peace.
       </p>
-     
+
       <p class=fancy>
         <b>But what about everyone else?</b><br>
-        Muggels can also see the reservation status of the bog though a display on the door that indicates if the bog is reserved in the next 5 minutes, or currently in use. <br> If they go on the bog when the light is on, they'll get a stur that will deter.
+        Muggels can also see the reservation status of the bog though a display on the door that indicates if the bog is
+        reserved in the next 5 minutes, or currently in use. <br> If they go on the bog when the light is on, they'll
+        get a stur that will deter.
       </p>
       <p class=fancy>
         Premium membershit will give let you see if the bog door is locked, so you can guarantee a free wee.
       </p>
-       <p>
-         <a href="#">Upgrade to premium now</a>
-       </p>
+      <p>
+        <a href="#">Upgrade to premium now</a>
+      </p>
+    </div>
   </div>
-</div>  
+
+
+  <script>
+    document.getElementById("showLockedButton").addEventListener("click", () => {
+
+      document.getElementById('toilet').classList.add('lookin');
+
+      var outputElem = document.getElementById("lockedOutput");
+
+      fetch("./isLocked")
+        .then(r => r.json())
+        .then(data => {
+          var locked = data.locked;
+          if (locked) {
+            outputElem.textContent = "Yeah, its locked soz";
+          } else {
+            outputElem.textContent = "It's Free! quick go get it";
+          }
+        })
+
+    })
+  </script>
