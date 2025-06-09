@@ -9,9 +9,9 @@ function index(req,res,viewLoc){
   var reservation = reservationSystem.nextReservation(user.id,new Date());
   var error = req.query.error;
   if(reservation){
-    reservation.startTime=new Date(reservation.start).toLocaleTimeString();
     res.render("reserve/viewReservation",{
       reservation,
+      startTimeTicks: +new Date(reservation.start),
       error
     })
   }
@@ -22,17 +22,11 @@ function index(req,res,viewLoc){
   }
 }
 
-function parseTime( t ) {
-  var d = new Date();
-  var time = t.match( /(\d+)(?::(\d\d))?\s*(p?)/ );
-  d.setHours( parseInt( time[1]) + (time[3] ? 12 : 0) );
-  d.setMinutes( parseInt( time[2]) || 0 );
-  return d;
-}
+
 
 function reserve(req,res,viewLoc){
   var form = {
-    when:req.body.when?parseTime(req.body.when):false,
+    when:req.body.when?new Date(req.body.when):false,
     asap:req.body.asap
   }
 
@@ -45,6 +39,7 @@ function reserve(req,res,viewLoc){
   if(!form.asap && !form.when){
     throw "no time :(";
   }
+
 
   var searchFromTime;
   if(form.asap){

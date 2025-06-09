@@ -42,8 +42,7 @@
                     <div>
                         Time:
                     </div>
-                    <div>
-                        {{reservation.startTime}}
+                    <div id="timeDisplay" data-start="{{startTimeTicks}}">
                     </div>
                 </div>
                 <div class="col reserveButton roundCorners bgCol1 flex-row-center">
@@ -68,3 +67,9 @@
 
     </div>
 </div>
+
+<script>
+    var el = document.getElementById("timeDisplay");
+    el.textContent = new Date(+el.dataset.start).toLocaleTimeString();
+
+</script>

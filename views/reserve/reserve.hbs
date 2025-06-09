@@ -14,7 +14,7 @@
 
     .reserveButton:has(input:checked) {
         flex-grow: 5;
-        outline:2px solid hsl(240 102% 74% / 1);
+        outline: 2px solid hsl(240 102% 74% / 1);
     }
 
     .row:has(#SpecificTime:checked, #NOWWW:checked) .reserveButton:not(:has(input:checked)) {
@@ -61,7 +61,8 @@
                         <div>
                             <input type="radio" name="asap" id="SpecificTime" value="specified" class="sr-only"
                                 autocomplete="off">
-                            <input type="time" name="when" id="when">
+                            <input type="time" id="when">
+                            <input type="hidden" id="whenProper" name="when">
                         </div>
                     </label>
 
@@ -91,13 +92,32 @@
 </div>
 
 <script>
+    //# sourceURL=script.js
     document.querySelector('[for="SpecificTime"]').addEventListener("click", () => {
         document.getElementById("when").focus();
     });
-    document.getElementById("when").addEventListener("focus",()=>{
-         document.getElementById("SpecificTime").checked = true;
+    document.getElementById("when").addEventListener("focus", () => {
+        document.getElementById("SpecificTime").checked = true;
     });
+
+    function parseTime(t) {
+        var d = new Date();
+        var time = t.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+        d.setHours(parseInt(time[1]) + (time[3] ? 12 : 0));
+        d.setMinutes(parseInt(time[2]) || 0);
+        return d;
+    }
+
+
     document.getElementById("form").addEventListener("submit", (e) => {
+
+      
+        if(!document.querySelector("[name=asap]:checked")){
+            
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            return;
+        }
 
         if (!document.querySelector("[name=asap]:checked")?.value) {
             document.getElementById("validation-chooseType").style.display = "";
@@ -117,9 +137,11 @@
 
             e.stopImmediatePropagation();
             e.preventDefault();
+            return;
         }
 
-        if (document.querySelector("[name=asap]:checked") == "specified" && !document.getElementById("when").value) {
+        if (document.querySelector("[name=asap]:checked").value == "specified" && !document.getElementById("when").value) {
+            
             var tf = document.getElementById("when");
             tf.classList.add("border-error");
             var message = document.getElementById("validation-noTime");
@@ -132,6 +154,14 @@
             }, { once: true });
             e.stopImmediatePropagation();
             e.preventDefault();
+            return;
+        }
+
+        if(document.querySelector("[name=asap]:checked").value == "specified" && document.getElementById("when").value){
+            var timeVal = document.getElementById("when").value;
+            var timeParsed = parseTime(timeVal);
+
+            document.getElementById("whenProper").value = timeParsed.toString();
         }
 
     })
