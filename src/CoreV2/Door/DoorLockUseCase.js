@@ -2,10 +2,19 @@
 
 
 export default class DoorLockUseCase{
-    constructor(){
-
+    /**
+     * 
+     * @param {DoorRepo} doorRepo 
+     * @param {ReservationPresenter} reservationPresenter
+     */
+    constructor(doorRepo,reservationPresenter){
+        this.doorRepo = doorRepo;
+        this.reservationPresenter = reservationPresenter;
     }
-    execute(doorId){
-
-    }
+    
+    execute(doorId){    
+       this.doorRepo.
+        //update door
+        //update estimates
+    }   
 }
