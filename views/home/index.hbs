@@ -8,7 +8,7 @@
           <div>
             <p>
               Need the bog?
-              <button onclick="window.location.href='{{url}}/reserve'">Guarantee your right to pee - Reserve
+              <button onclick="window.location.href='{{url}}/reserve'">Guarantee your right to pee<br>Reserve
                 now</button>
 
             </p>
@@ -21,7 +21,7 @@
       <div class="lid flex-row-center">
         <div class="hole flex-row-center text-center">
 
-          <div class="floater">
+          <div class="floater flex-row-center" style="height:100%; align-content:center; flex-flow:column nowrap">
             <p id="lockedOutput">
               Loading
             </p>
@@ -123,9 +123,13 @@
         .then(data => {
           var locked = data.locked;
           if (locked) {
-            outputElem.textContent = "Yeah, its locked soz";
+            outputElem.textContent = "Better hold on, It's locked";
+            outputElem.parentElement.classList.remove("boglockd-free");
+            outputElem.parentElement.classList.add("boglockd-locked");
           } else {
             outputElem.textContent = "It's Free! quick go get it";
+            outputElem.parentElement.classList.add("boglockd-free");
+            outputElem.parentElement.classList.remove("boglockd-locked");
           }
         })
 
